@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    min-height: 100vh;
+    color: #fff;
+    background: rgb(15, 23, 42);
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    @apply font-bold text-xl text-white;
+}
+
+.validation-text {
+    @apply font-bold text-red-500;
+}
+
+.validation-input {
+    @apply border border-rose-500;
+}
+
+.v-enter-active,    
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
+:root {
+    --ms-bg: rgb(22,78,99);
+    --ms-dropdown-bg: rgb(22, 78, 99);
+    --ms-tag-bg: #fff;
+    --ms-tag-color: rgb(22, 78, 99);
+}
