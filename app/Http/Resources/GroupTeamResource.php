@@ -16,7 +16,7 @@ class GroupTeamResource extends JsonResource
     {
         return [
             'name' => $this->team->name,
-            'resultsByWeek' => $this->resultsByWeek
+            'results' => $this->results
         ];
     }
 }

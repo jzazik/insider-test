@@ -7,6 +7,12 @@ use App\Models\Group;
 
 class FixtureService
 {
+    private SimulationService $simulationService;
+    
+    public function __construct(SimulationService $simulationService) {
+        $this->simulationService = $simulationService;
+    }
+    
     public function generateAllFixtures()
     {
         $groups = Group::getWithoutFixtures();
@@ -56,4 +62,12 @@ class FixtureService
         
         return $matches;
     }
+    
+    public function simulateFixture(Fixture $fixture)
+    {
+        $fixture->home_group_team_score = $this->simulationService->simulate();
+        $fixture->away_group_team_score = $this->simulationService->simulate();
+        $fixture->save();
+    }
+    
 }

@@ -1,6 +1,8 @@
 <template>
-<div class="flex">
-  <div>Home {{ fixture.home }} - {{ fixture.away }}</div>
+<div class="flex gap-10 justify-between">
+  <div>{{ fixture.home }}</div>
+  <div>-</div>
+  <div>{{ fixture.away }}</div>
 </div>
 </template>
 

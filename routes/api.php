@@ -14,4 +14,5 @@ use \App\Http\Controllers\ProductController as ProductController;
 |
 */
 
-Route::post('/fixtures/generate/{group_id}', [\App\Http\Controllers\FixtureController::class, 'generate']);
+Route::post('/group/generate/fixtures/{group_id}', [\App\Http\Controllers\GroupTeamController::class, 'generateFixtures']);
+Route::post('/group/simulate/week/{group_id}', [\App\Http\Controllers\GroupTeamController::class, 'simulateWeek']);

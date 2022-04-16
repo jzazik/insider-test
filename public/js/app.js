@@ -22887,6 +22887,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)(['currentGroup', 'fixtures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapState)(['league'])),
   methods: {
     generateFixtures: function generateFixtures() {
+      this.handleRequest("/api/group/generate/fixtures/".concat(this.currentGroup.id), {
+        success_text: 'Fixtures generated successfully'
+      });
+    },
+    simulateWeek: function simulateWeek() {
+      this.handleRequest("/api/group/simulate/week/".concat(this.currentGroup.id), {
+        success_text: 'Fixtures generated successfully'
+      });
+    },
+    handleRequest: function handleRequest(url, params) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -22898,7 +22908,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/fixtures/generate/' + _this.currentGroup.id);
+                return axios__WEBPACK_IMPORTED_MODULE_4___default().post(url);
 
               case 3:
                 _yield$axios$post = _context.sent;
@@ -22908,7 +22918,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this.$snackbar.add({
                   type: 'success',
-                  text: 'Fixtures generated successfully'
+                  text: params.success_text
                 });
 
                 _context.next = 12;
@@ -22949,10 +22959,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex"
+  "class": "flex gap-10 justify-between"
 };
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "-", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Home " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fixture.home) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fixture.away), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fixture.home), 1
+  /* TEXT */
+  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.fixture.away), 1
   /* TEXT */
   )]);
 }
@@ -22978,7 +22995,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_2 = {
-  "class": "flex flex-wrap gap-5"
+  "class": "flex flex-wrap gap-20"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_fixture_week = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("fixture-week");
@@ -23062,25 +23079,24 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "py-2 pr-2 font-mono font-bold text-xs leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_2 = {
   "class": "py-2 px-2 text-xs italic"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+};
+var _hoisted_3 = {
   "class": "py-2 px-2 text-xs italic"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+};
+var _hoisted_4 = {
   "class": "py-2 px-2 text-xs italic"
-}, null, -1
-/* HOISTED */
-);
-
+};
+var _hoisted_5 = {
+  "class": "py-2 px-2 text-xs italic"
+};
+var _hoisted_6 = {
+  "class": "py-2 px-2 text-xs italic"
+};
+var _hoisted_7 = {
+  "class": "py-2 px-2 text-xs italic"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_v_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("v-table");
 
@@ -23097,7 +23113,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "hover:bg-sky-800"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.name), 1
         /* TEXT */
-        ), _hoisted_2, _hoisted_3, _hoisted_4]);
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.pts), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.p), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.w), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.d), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.l), 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(team.results.gd), 1
+        /* TEXT */
+        )]);
       }), 128
       /* KEYED_FRAGMENT */
       ))];
@@ -23221,7 +23249,9 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Generate fixtures");
 
-var _hoisted_3 = {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Simulate one week");
+
+var _hoisted_4 = {
   "class": "pt-5 border-t border-cyan-500"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23245,7 +23275,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_group_table, {
+  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.fixtures.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_v_button, {
+    key: 1,
+    onClick: $options.simulateWeek
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_3];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_group_table, {
     group: _ctx.currentGroup
   }, null, 8
   /* PROPS */

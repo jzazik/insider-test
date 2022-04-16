@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Fixtures</h1>
-    <div class="flex flex-wrap gap-5">
+    <div class="flex flex-wrap gap-20">
       <fixture-week :fixtures="fixtures" :key="key" v-for="fixtures, key in fixturesByWeek"/>
     </div>
   </div>

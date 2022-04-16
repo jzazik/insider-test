@@ -2,6 +2,7 @@
   <div class="flex justify-between mb-5">
     <h1>{{ league.name }}</h1>
     <v-button v-if="!fixtures.length" @click="generateFixtures">Generate fixtures</v-button>
+    <v-button v-if="fixtures.length" @click="simulateWeek">Simulate one week</v-button>
   </div>
   <main class="pt-5 border-t border-cyan-500">
     <group-table :group="currentGroup"/>
@@ -32,13 +33,25 @@ export default {
     ...mapState(['league'])
   },
   methods: {
-    async generateFixtures() {
+    generateFixtures() {
+      this.handleRequest(
+        `/api/group/generate/fixtures/${this.currentGroup.id}`,
+        {success_text: 'Fixtures generated successfully'}
+      )
+    },
+    simulateWeek() {
+      this.handleRequest(
+        `/api/group/simulate/week/${this.currentGroup.id}`, 
+        { success_text: 'Fixtures generated successfully'}
+      )
+    },
+    async handleRequest(url, params) {
       try {
-        const { data } = await axios.post('/api/fixtures/generate/' + this.currentGroup.id)
+        const {data} = await axios.post(url)
         this.$store.dispatch("syncLeague", data);
         this.$snackbar.add({
           type: 'success',
-          text: 'Fixtures generated successfully'
+          text: params.success_text
         })
       } catch (e) {
         console.error(e)

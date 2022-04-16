@@ -8,12 +8,22 @@
         {{ team.name }}
       </td>
       <td class="py-2 px-2 text-xs italic">
+        {{ team.results.pts }}
       </td>
       <td class="py-2 px-2 text-xs italic">
-        
+        {{ team.results.p }}
       </td>
       <td class="py-2 px-2 text-xs italic">
-        
+        {{ team.results.w }}
+      </td>
+      <td class="py-2 px-2 text-xs italic">
+        {{ team.results.d }}
+      </td>
+      <td class="py-2 px-2 text-xs italic">
+        {{ team.results.l }}
+      </td>
+      <td class="py-2 px-2 text-xs italic">
+        {{ team.results.gd }}
       </td>
     </tr>
   </v-table>

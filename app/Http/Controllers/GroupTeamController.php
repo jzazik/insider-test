@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LeagueResource;
+use App\Models\Group;
 use App\Models\GroupTeam;
+use App\Services\FixtureService;
+use App\Services\GroupService;
+use App\Services\LeagueService;
 use Illuminate\Http\Request;
 
 class GroupTeamController extends Controller
@@ -81,5 +86,17 @@ class GroupTeamController extends Controller
     public function destroy(GroupTeam $groupTeam)
     {
         //
+    }
+
+    public function generateFixtures($group_id, FixtureService $fixtureService, LeagueService $leagueService)
+    {
+        $fixtureService->getGroupFixtures(Group::findOrFail($group_id));
+        return new LeagueResource($leagueService->getCurrent());
+    }
+    
+    public function simulateWeek($group_id, GroupService $groupService, LeagueService $leagueService)
+    {
+        $groupService->simulateWeek(Group::findOrFail($group_id));
+        return new LeagueResource($leagueService->getCurrent());
     }
 }

@@ -86,10 +86,4 @@ class FixtureController extends Controller
     {
         //
     }
-    
-    public function generate($id, FixtureService $fixtureService, LeagueService $leagueService)
-    {
-        $fixtureService->getGroupFixtures(Group::find($id));
-        return new LeagueResource($leagueService->getCurrent());
-    }
 }
