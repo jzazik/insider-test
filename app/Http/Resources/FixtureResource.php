@@ -15,9 +15,10 @@ class FixtureResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'week' => $this->week_number,
             'home' => $this->homeGroupTeam->team->name,
-            'away' => $this->awayGroupTeam,
+            'away' => $this->awayGroupTeam->team->name,
         ];
     }
 }

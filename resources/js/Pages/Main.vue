@@ -5,7 +5,7 @@
   </div>
   <main class="pt-5 border-t border-cyan-500">
     <group-table :group="currentGroup"/>
-    <fixture-list/>
+    <fixture-list class="mt-10" :fixtures="fixtures"/>
   </main>
 </template>
 
