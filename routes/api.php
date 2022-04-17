@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ProductController as ProductController;
+use \App\Http\Controllers\GroupTeamController as GroupTeamController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,5 +14,10 @@ use \App\Http\Controllers\ProductController as ProductController;
 |
 */
 
-Route::post('/group/generate/fixtures/{group_id}', [\App\Http\Controllers\GroupTeamController::class, 'generateFixtures']);
-Route::post('/group/simulate/week/{group_id}', [\App\Http\Controllers\GroupTeamController::class, 'simulateWeek']);
+Route::prefix('group')->controller(GroupTeamController::class)->group(function () {
+    Route::post('/generate/fixtures/{group_id}', 'generateFixtures');
+    Route::post('/simulate/week/{group_id}', 'simulateWeek');
+    Route::post('/simulate/week/all/{group_id}', 'simulateAllWeeks');
+    Route::post('/reset/{group_id}', 'resetWeek');
+});
+

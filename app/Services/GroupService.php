@@ -22,4 +22,19 @@ class GroupService
         }
         
     }
+    
+    public function simulateAllWeeks(Group $group)
+    {
+        $fixturesThisWeek = $group->fixtures()->whereNull('home_group_team_score')->get();
+        
+        foreach ($fixturesThisWeek as $fixture) {
+            $this->fixtureService->simulateFixture($fixture);
+        }
+        
+    }
+    
+    public function reset(Group $group)
+    {
+        $group->fixtures()->delete();
+    }
 }

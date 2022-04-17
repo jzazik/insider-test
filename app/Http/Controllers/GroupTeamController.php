@@ -12,6 +12,16 @@ use Illuminate\Http\Request;
 
 class GroupTeamController extends Controller
 {
+    private $groupService;
+    private $fixtureService;
+    private $leagueService;
+    
+    public function __construct(GroupService $groupService, LeagueService $leagueService, FixtureService $fixtureService)
+    {
+        $this->groupService = $groupService;
+        $this->leagueService = $leagueService;
+        $this->fixtureService = $fixtureService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,15 +98,27 @@ class GroupTeamController extends Controller
         //
     }
 
-    public function generateFixtures($group_id, FixtureService $fixtureService, LeagueService $leagueService)
+    public function generateFixtures($group_id)
     {
-        $fixtureService->getGroupFixtures(Group::findOrFail($group_id));
-        return new LeagueResource($leagueService->getCurrent());
+        $this->fixtureService->getGroupFixtures(Group::findOrFail($group_id));
+        return new LeagueResource($this->leagueService->getCurrent());
     }
     
-    public function simulateWeek($group_id, GroupService $groupService, LeagueService $leagueService)
+    public function simulateWeek($group_id)
     {
-        $groupService->simulateWeek(Group::findOrFail($group_id));
-        return new LeagueResource($leagueService->getCurrent());
+        $this->groupService->simulateWeek(Group::findOrFail($group_id));
+        return new LeagueResource($this->leagueService->getCurrent());
+    }
+    
+    public function simulateAllWeeks($group_id)
+    {
+        $this->groupService->simulateAllWeeks(Group::findOrFail($group_id));
+        return new LeagueResource($this->leagueService->getCurrent());
+    }
+    
+    public function resetWeek($group_id)
+    {
+        $this->groupService->reset(Group::findOrFail($group_id));
+        return new LeagueResource($this->leagueService->getCurrent());
     }
 }

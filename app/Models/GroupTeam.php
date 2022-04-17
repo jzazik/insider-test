@@ -37,25 +37,43 @@ class GroupTeam extends Model
             if ($fixture->home_group_team_score === null) {
                 return $carry;
             }
+            
+            $w = 0;
+            $d = 0;
+            $l = 0;
+            $pts = 0;
+            $gd = abs($fixture->home_group_team_score - $fixture->away_group_team_score);
+            
             $homeTeamWin = $fixture->home_group_team_score > $fixture->away_group_team_score;
             $isHomeTeam = $this->id === $fixture->home_group_team_id;
             $isDraw = $fixture->home_group_team_score === $fixture->away_group_team_score;
             if ($isHomeTeam && $homeTeamWin) {
                 $pts = 3;
+                $w++;
+                $gd = $fixture->home_group_team_score - $fixture->away_group_team_score;
             } elseif ($isDraw) {
                 $pts = 1;
+                $d++;
             } else {
-                $pts = 0;
+                $l++;
+                $gd = -$gd;
             }
             
             $carry['pts'] += $pts;
             $carry['p']++;
-            $carry['w'] = 0;
-            $carry['d'] = 0;
-            $carry['l'] = 0;
-            $carry['gd'] = 0;
+            $carry['w'] += $w;
+            $carry['d'] += $d;
+            $carry['l'] += $l;
+            $carry['gd'] += $gd;
             
             return $carry;
-        }, ['pts' => 0, 'p' => 0]);
+        }, [
+            'pts' => 0, 
+            'p' => 0, 
+            'w' => 0,
+            'd' => 0,
+            'l' => 0,
+            'gd' => 0
+        ]);
     }
 }

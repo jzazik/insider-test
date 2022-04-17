@@ -1,7 +1,7 @@
 <template>
   <h1>Group {{ group.name }}</h1>
   <v-table class="w-full" :th-arr="[ 'Team name', 'PTS', 'P', 'W', 'D', 'L', 'GD']">
-    <tr v-for="team in group.teams" :key="team.id" class="hover:bg-sky-800">
+    <tr v-for="team in teamsSorted" :key="team.id" class="hover:bg-sky-800">
       <td
         class="py-2 pr-2 font-mono font-bold text-xs leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400"
       >
@@ -45,7 +45,16 @@ export default {
     return {};
   },
   computed: {
-    
+    teamsSorted() {
+      const teams = [...this.group.teams]
+      return teams.sort((team1, team2) => {
+        const ptsDiff = team2.results.pts - team1.results.pts
+        const gdDiff = team2.results.gd - team1.results.gd
+        
+        return ptsDiff !== 0 ? ptsDiff : gdDiff
+        
+      })
+    }
   },
   methods: {
     

@@ -2,11 +2,15 @@
   <div class="flex justify-between mb-5">
     <h1>{{ league.name }}</h1>
     <v-button v-if="!fixtures.length" @click="generateFixtures">Generate fixtures</v-button>
-    <v-button v-if="fixtures.length" @click="simulateWeek">Simulate one week</v-button>
+    <div v-else class="flex gap-3">
+      <v-button @click="simulateWeek">Simulate one week</v-button>
+      <v-button @click="simulateAllWeeks">Simulate all weeks</v-button>
+      <v-button @click="resetGroup">Reset group</v-button>
+    </div>
   </div>
   <main class="pt-5 border-t border-cyan-500">
     <group-table :group="currentGroup"/>
-    <fixture-list class="mt-10" :fixtures="fixtures"/>
+    <fixture-list v-if="fixtures.length" class="mt-10" :fixtures="fixtures"/>
   </main>
 </template>
 
@@ -42,7 +46,19 @@ export default {
     simulateWeek() {
       this.handleRequest(
         `/api/group/simulate/week/${this.currentGroup.id}`, 
-        { success_text: 'Fixtures generated successfully'}
+        { success_text: 'Week simulated successfully'}
+      )
+    },
+    simulateAllWeeks() {
+      this.handleRequest(
+        `/api/group/simulate/week/all/${this.currentGroup.id}`, 
+        { success_text: 'All weeks simulated successfully'}
+      )
+    },
+    resetGroup() {
+      this.handleRequest(
+        `/api/group/reset/${this.currentGroup.id}`, 
+        { success_text: 'Reset success'}
       )
     },
     async handleRequest(url, params) {

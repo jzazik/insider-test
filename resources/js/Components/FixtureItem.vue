@@ -1,7 +1,7 @@
 <template>
-<div class="flex gap-10 justify-between">
+<div class="flex gap-5 justify-between">
   <div>{{ fixture.home }}</div>
-  <div>-</div>
+  <div>{{ fixture.home_group_team_score }} - {{ fixture.away_group_team_score }}</div>
   <div>{{ fixture.away }}</div>
 </div>
 </template>
