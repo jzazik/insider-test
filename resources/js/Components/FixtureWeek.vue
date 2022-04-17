@@ -1,10 +1,11 @@
 <template>
   <v-table :th-arr="[weekName]">
-    <tr class="hover:bg-sky-800">
-      <td
-        class="py-2 pr-2 font-mono font-bold text-xs leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400"
-      >
-        <fixture-item v-for="fixture in fixtures" :fixture="fixture" :key="fixture.id"/>
+    <tr 
+      v-for="fixture in fixtures" :key="fixture.id" 
+      class="hover:bg-sky-800"
+    >
+      <td class="py-2 pr-2 font-mono font-bold text-xs leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400">
+        <fixture-item :fixture="fixture" />
       </td>
 
     </tr>
